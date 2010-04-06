@@ -4,7 +4,6 @@ import edu.gvsu.jmetro.controller.JMetroController;
 import edu.gvsu.jmetro.engine.JMetroGame;
 import edu.gvsu.jmetro.gui.JMetroGUI;
 
-
 /**
  * The main class that instantiates the model view and controller used in the
  * game.

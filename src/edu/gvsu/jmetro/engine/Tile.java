@@ -1,11 +1,8 @@
 package edu.gvsu.jmetro.engine;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,21 +11,21 @@ import java.awt.image.BufferedImage;
  */
 public class Tile extends Cell implements Connectable {
 
-	private BufferedImage	image;
+	private BufferedImage image;
 
-	private Rail[]			rails;
+	private int id;
 
+	private Rail[] rails;
 
-	public Tile(String connection, BufferedImage image) {
+	public Tile(int id, String connection, BufferedImage image) {
+		setId(id);
 		setImage(image);
 		setConnections(connection);
 	}
 
-
 	public BufferedImage getImage() {
 		return image;
 	}
-
 
 	/**
 	 * @return the rails
@@ -37,17 +34,15 @@ public class Tile extends Cell implements Connectable {
 		return rails;
 	}
 
-
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println("Repainting");
-        g.setColor(Color.red);
+		System.out.println("Painting tile: " + id);
+		g.setColor(Color.red);
 		Graphics2D g2d = (Graphics2D) g.create();
 		g.drawImage(image, 0, 0, null);
 		// g.dispose();
 	}
-
 
 	public void setConnections(String description) {
 		// TODO Auto-generated method stub
@@ -60,8 +55,22 @@ public class Tile extends Cell implements Connectable {
 		}
 	}
 
-
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 }

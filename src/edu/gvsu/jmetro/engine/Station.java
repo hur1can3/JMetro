@@ -6,17 +6,15 @@ import java.awt.image.BufferedImage;
 
 public class Station extends Cell implements Connectable {
 
-	private BufferedImage	image;
+	private BufferedImage image;
 
-	private Rail[]			rails;
-
+	private Rail[] rails;
 
 	public Station(String connection, BufferedImage image) {
 		// TODO Auto-generated constructor stub
 		setImage(image);
 		setConnections(connection);
 	}
-
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -26,7 +24,6 @@ public class Station extends Cell implements Connectable {
 		// g.dispose();
 	}
 
-
 	/**
 	 * @param image
 	 *            the image to set
@@ -35,14 +32,12 @@ public class Station extends Cell implements Connectable {
 		this.image = image;
 	}
 
-
 	/**
 	 * @return the image
 	 */
 	public BufferedImage getImage() {
 		return image;
 	}
-
 
 	@Override
 	public void setConnections(String description) {

@@ -30,41 +30,39 @@ import edu.gvsu.jmetro.engine.Tile;
  */
 public class JMetroGUI extends JFrame implements Observer {
 
-	private JMetroGame		metroGame;
+	private JMetroGame metroGame;
 
-	private JPanel			boardPanel;
+	private JPanel boardPanel;
 
-	private CellPanel[][]	gameBoard;
+	private CellPanel[][] gameBoard;
 
-	private JPanel			MainPanel;
+	private JPanel MainPanel;
 
-	private JMenuItem[]		menuItems;
+	private JMenuItem[] menuItems;
 
-	private JMenu[]			menus;
+	private JMenu[] menus;
 
-	private JLabel[]		playerNames;
+	private JLabel[] playerNames;
 
-	private JPanel			PlayerPanel;
+	private JPanel PlayerPanel;
 
-	private JPanel[]		Players;
+	private JPanel[] Players;
 
-	private JLabel[]		playerScores;
+	private JLabel[] playerScores;
 
-	private CellPanel[]		playerTiles;
+	private CellPanel[] playerTiles;
 
-	private JLabel			tileBag;
+	private JLabel tileBag;
 
-	private JPanel			tileBagPanel;
+	private JPanel tileBagPanel;
 
-	private CellPanel		tileBagStack;
-
+	private CellPanel tileBagStack;
 
 	/** Creates new form GUI */
 	public JMetroGUI(JMetroGame metroGame) {
 		this.metroGame = metroGame;
 		initComponents();
 	}
-
 
 	/**
 *
@@ -79,7 +77,6 @@ public class JMetroGUI extends JFrame implements Observer {
 		pack();
 	}
 
-
 	private void initFrame() {
 		// TODO Auto-generated method stub
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,7 +89,6 @@ public class JMetroGUI extends JFrame implements Observer {
 						javax.swing.BoxLayout.LINE_AXIS));
 	}
 
-
 	private void initGameBoard() {
 		// a simple counter to help setup the cell type
 		int type = 0;
@@ -104,41 +100,36 @@ public class JMetroGUI extends JFrame implements Observer {
 				BufferedImage[] simage = new BufferedImage[4];
 				try {
 					for (int s = 0; s < 4; s++) {
-						simage[s] = ImageIO.read(new File(
-								"tiles/station" + s + ".png"));
+						simage[s] = ImageIO.read(new File("tiles/station" + s
+								+ ".png"));
 					}
-				}
-				catch (IOException e2) {
+				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				if (type % 11 == 0 && type != 0 && type != 121 - 11) {
-					gameBoard[i][j] = new StationPanel(new Station(
-							null, simage[3]));
+					gameBoard[i][j] = new StationPanel(new Station(null,
+							simage[3]));
 				} else if (type < 10 && type != 0) {
-					gameBoard[i][j] = new StationPanel(new Station(
-							null, simage[0]));
-				} else if (type % 11 == 10 && type != 10
-						&& type != 120) {
-					gameBoard[i][j] = new StationPanel(new Station(
-							null, simage[1]));
+					gameBoard[i][j] = new StationPanel(new Station(null,
+							simage[0]));
+				} else if (type % 11 == 10 && type != 10 && type != 120) {
+					gameBoard[i][j] = new StationPanel(new Station(null,
+							simage[1]));
 				} else if (type > 110 && type != 11 & type != 120) {
-					gameBoard[i][j] = new StationPanel(new Station(
-							null, simage[2]));
+					gameBoard[i][j] = new StationPanel(new Station(null,
+							simage[2]));
 					gameBoard[i][j].setIgnoreRepaint(true);
 				} else {
-					gameBoard[i][j] = new TilePanel(new Tile(null,
-							image), 2);
+					gameBoard[i][j] = new TilePanel(new Tile((i * 10 + j),
+							null, image), 2);
 				}
 				gameBoard[i][j].setBorder(BorderFactory
 						.createLineBorder(Color.BLACK));
+				gameBoard[i][j].setBackground(new Color(204, 204, 204));
+				gameBoard[i][j].setMinimumSize(new java.awt.Dimension(60, 60));
 				gameBoard[i][j]
-						.setBackground(new Color(204, 204, 204));
-				gameBoard[i][j].setMinimumSize(new java.awt.Dimension(
-						60, 60));
-				gameBoard[i][j]
-						.setPreferredSize(new java.awt.Dimension(60,
-								60));
+						.setPreferredSize(new java.awt.Dimension(60, 60));
 				gameBoard[i][j].setName("" + i);
 				boardPanel.add(gameBoard[i][j]);
 				gameBoard[i][j].addMouseListener(new MouseListener() {
@@ -151,40 +142,36 @@ public class JMetroGUI extends JFrame implements Observer {
 							for (int j = 0; j < gameBoard[i].length; j++) {
 								if (gameBoard[i][j] == temp
 										&& Players[turn].getBorder() != null) {
-									Cell source = playerTiles[turn]
-											.getCell();
-									Cell target = gameBoard[i][j]
-											.getCell();
+									Cell source = playerTiles[turn].getCell();
+									Cell target = gameBoard[i][j].getCell();
 									target = source;
-									source = metroGame.getTileBag()
-											.pop();
+									source = metroGame.getTileBag().pop();
 									playerTiles[turn].setCell(source);
 									playerTiles[turn].repaint();
 									PlayerPanel.repaint();
-									gameBoard[i][j].getCell()
-											.paintComponent(
-													getGraphics());
+									gameBoard[i][j].getCell().paintComponent(
+											getGraphics());
 									metroGame.setCurentTurn(turn++);
 								}
 							}
 						}
 					}
 
+					@Override
+					public void mouseEntered(MouseEvent e) {
+					}
 
 					@Override
-					public void mouseEntered(MouseEvent e) {}
-
-
-					@Override
-					public void mouseExited(MouseEvent e) {}
-
+					public void mouseExited(MouseEvent e) {
+					}
 
 					@Override
-					public void mousePressed(MouseEvent e) {}
-
+					public void mousePressed(MouseEvent e) {
+					}
 
 					@Override
-					public void mouseReleased(MouseEvent e) {}
+					public void mouseReleased(MouseEvent e) {
+					}
 				});
 				type++;
 			}
@@ -195,7 +182,6 @@ public class JMetroGUI extends JFrame implements Observer {
 		// add it to the frame
 		getContentPane().add(MainPanel);
 	}
-
 
 	private void initMenus() {
 		// TODO Auto-generated method stub
@@ -239,7 +225,6 @@ public class JMetroGUI extends JFrame implements Observer {
 		this.setJMenuBar(menubar);
 	}
 
-
 	private void initPanels() {
 		// TODO Auto-generated method stub
 		MainPanel = new javax.swing.JPanel();
@@ -250,7 +235,6 @@ public class JMetroGUI extends JFrame implements Observer {
 		MainPanel.setName("MainPanel"); // NOI18N
 		MainPanel.setLayout(new java.awt.BorderLayout());
 	}
-
 
 	private void initTileBagPanel() {
 		tileBag = new JLabel("Bag: " + metroGame.getTileBag().size());
@@ -278,8 +262,7 @@ public class JMetroGUI extends JFrame implements Observer {
 												bagLayout
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.CENTER)
-														.addComponent(
-																tileBag)
+														.addComponent(tileBag)
 														.addComponent(
 																tileBagStack,
 																javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -289,23 +272,16 @@ public class JMetroGUI extends JFrame implements Observer {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 		// handle vertical layout
-		bagLayout
-				.setVerticalGroup(bagLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								bagLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(
-												tileBagStack,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(tileBag)));
+		bagLayout.setVerticalGroup(bagLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				bagLayout.createSequentialGroup().addContainerGap()
+						.addComponent(tileBagStack,
+								javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addComponent(tileBag)));
 		PlayerPanel.add(tileBagPanel);
 	}
-
 
 	private void initPlayerPanel() {
 		// TODO Auto-generated method stub
@@ -320,15 +296,12 @@ public class JMetroGUI extends JFrame implements Observer {
 			// .createEtchedBorder());
 			Players[i].setName("player" + i);
 			// playerTiles[i] = new JPanel();
-			playerTiles[i] = new TilePanel(metroGame.getTileBag()
-					.pop(), i);
+			playerTiles[i] = new TilePanel(metroGame.getTileBag().pop(), i);
 			playerTiles[i].setBorder(javax.swing.BorderFactory
 					.createLineBorder(new java.awt.Color(0, 0, 0)));
-			playerTiles[i].setMinimumSize(new java.awt.Dimension(60,
-					60));
+			playerTiles[i].setMinimumSize(new java.awt.Dimension(60, 60));
 			playerTiles[i].setName("pile" + i);
-			playerTiles[i].setPreferredSize(new java.awt.Dimension(60,
-					60));
+			playerTiles[i].setPreferredSize(new java.awt.Dimension(60, 60));
 			playerTiles[i].addMouseListener(new MouseListener() {
 
 				@Override
@@ -338,24 +311,23 @@ public class JMetroGUI extends JFrame implements Observer {
 					}
 				}
 
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				}
 
 				@Override
-				public void mouseEntered(MouseEvent e) {}
-
-
-				@Override
-				public void mouseExited(MouseEvent e) {}
-
+				public void mouseExited(MouseEvent e) {
+				}
 
 				@Override
-				public void mousePressed(MouseEvent e) {}
-
+				public void mousePressed(MouseEvent e) {
+				}
 
 				@Override
-				public void mouseReleased(MouseEvent e) {}
+				public void mouseReleased(MouseEvent e) {
+				}
 			});
-			playerNames[i] = new JLabel(metroGame.getPlayers()[i]
-					.getName());
+			playerNames[i] = new JLabel(metroGame.getPlayers()[i].getName());
 			playerScores[i] = new JLabel("Score: "
 					+ metroGame.getPlayers()[i].getScore());
 			// handle horizontal layout
@@ -387,23 +359,15 @@ public class JMetroGUI extends JFrame implements Observer {
 													javax.swing.GroupLayout.DEFAULT_SIZE,
 													Short.MAX_VALUE)));
 			// handle vertical layout
-			PlayerLayout
-					.setVerticalGroup(PlayerLayout
-							.createParallelGroup(
-									javax.swing.GroupLayout.Alignment.LEADING)
-							.addGroup(
-									PlayerLayout
-											.createSequentialGroup()
-											.addContainerGap()
-											.addComponent(
-													playerTiles[i],
-													javax.swing.GroupLayout.PREFERRED_SIZE,
-													javax.swing.GroupLayout.DEFAULT_SIZE,
-													javax.swing.GroupLayout.PREFERRED_SIZE)
-											.addComponent(
-													playerNames[i])
-											.addComponent(
-													playerScores[i])));
+			PlayerLayout.setVerticalGroup(PlayerLayout.createParallelGroup(
+					javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+					PlayerLayout.createSequentialGroup().addContainerGap()
+							.addComponent(playerTiles[i],
+									javax.swing.GroupLayout.PREFERRED_SIZE,
+									javax.swing.GroupLayout.DEFAULT_SIZE,
+									javax.swing.GroupLayout.PREFERRED_SIZE)
+							.addComponent(playerNames[i]).addComponent(
+									playerScores[i])));
 			PlayerPanel.add(Players[i]);
 		}
 		// finish setting up playerpanel
@@ -416,14 +380,12 @@ public class JMetroGUI extends JFrame implements Observer {
 		getContentPane().add(PlayerPanel);
 	}
 
-
 	public void showError(String message) {
-	// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 	}
-
 
 	@Override
 	public void update(Observable o, Object arg) {
-	// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 	}
 }
