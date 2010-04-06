@@ -25,5 +25,5 @@ public abstract class CellPanel extends JPanel {
 	}
 
 
-	public abstract void paintComponent(Graphics g);
+	public void paintComponent(Graphics g) {}
 }

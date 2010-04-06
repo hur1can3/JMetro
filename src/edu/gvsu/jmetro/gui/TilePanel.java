@@ -23,14 +23,10 @@ public class TilePanel extends CellPanel {
 
 
 	public void paintComponent(Graphics g) {
-		// super.getComponentGraphics(g);
-		// super.paintChildren(g);
 		super.paintComponents(g);
-		Graphics2D g2 = (Graphics2D) g;
 		getCellTile().paintComponent(g);
-		// System.out.print(g.toString());
-		//g.dispose();
-		//g2.dispose();
+		// g.dispose();
+		// g2.dispose();
 	}
 
 

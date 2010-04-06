@@ -1,8 +1,9 @@
 package edu.gvsu.jmetro.engine;
 
 import java.awt.Graphics;
+import javax.swing.JComponent;
 
-public abstract class Cell {
+public class Cell extends JComponent {
 
-	public abstract void paintComponent(Graphics g);
+	public void paintComponent(Graphics g) {}
 }

@@ -1,6 +1,7 @@
 package edu.gvsu.jmetro.engine;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Station extends Cell implements Connectable {
@@ -19,8 +20,10 @@ public class Station extends Cell implements Connectable {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g.create();
 		g.drawImage(image, 0, 0, null);
-		//g.dispose();
+		// g.dispose();
 	}
 
 
