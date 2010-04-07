@@ -1,14 +1,29 @@
 package edu.gvsu.jmetro.gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.border.Border;
 import edu.gvsu.jmetro.engine.Tile;
 
 public class TilePanel extends CellPanel {
 
-	private Tile	cellTile;
-
+	// private Tile cellTile;
 	private int		index;
+
+	private boolean	selected;
+
+	private Border	border;
+
+
+	public Border getBorder() {
+		return border;
+	}
+
+
+	public void setBorder(Border border) {
+		this.border = border;
+	}
 
 
 	/**
@@ -17,16 +32,19 @@ public class TilePanel extends CellPanel {
 	 */
 	public TilePanel(Tile tile, int i) {
 		super(tile);
-		setCellTile(tile);
 		setIndex(i);
 	}
 
 
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
-		getCellTile().paintComponent(g);
-		// g.dispose();
-		// g2.dispose();
+		// g.setPaintMode();
+		g.clearRect(0, 0, 60, 60);
+		// g.finalize();
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setColor(Color.LIGHT_GRAY);
+		g2d.fillRect(0, 0, 60, 60);
+		super.getCell().paintComponent(g2d);
 	}
 
 
@@ -48,18 +66,18 @@ public class TilePanel extends CellPanel {
 
 
 	/**
-	 * @param cellTile
-	 *            the cellTile to set
+	 * @param selected
+	 *            the selected to set
 	 */
-	public void setCellTile(Tile cellTile) {
-		this.cellTile = cellTile;
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 
 	/**
-	 * @return the cellTile
+	 * @return the selected
 	 */
-	public Tile getCellTile() {
-		return cellTile;
+	public boolean isSelected() {
+		return selected;
 	}
 }

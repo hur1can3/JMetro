@@ -21,7 +21,9 @@ public abstract class CellPanel extends JPanel {
 
 
 	public void setCell(Cell cell) {
+		//this.cell.setImage(cell.getImage());
 		this.cell = cell;
+		//this.cell.repaint();
 	}
 
 

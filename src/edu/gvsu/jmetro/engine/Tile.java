@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 /**
  * @author Matthew Levandowski (levandma@mail.gvsu.edu)
@@ -11,21 +12,24 @@ import java.awt.image.BufferedImage;
  */
 public class Tile extends Cell implements Connectable {
 
-	private BufferedImage image;
+	private int		id;
 
-	private int id;
+	private Rail[]	rails;
 
-	private Rail[] rails;
 
 	public Tile(int id, String connection, BufferedImage image) {
+		super(connection, image);
 		setId(id);
-		setImage(image);
 		setConnections(connection);
 	}
 
-	public BufferedImage getImage() {
-		return image;
+
+	@Override
+	public String toString() {
+		return "Tile [id=" + id + ", rails=" + Arrays.toString(rails)
+				+ "]";
 	}
+
 
 	/**
 	 * @return the rails
@@ -34,15 +38,6 @@ public class Tile extends Cell implements Connectable {
 		return rails;
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		System.out.println("Painting tile: " + id);
-		g.setColor(Color.red);
-		Graphics2D g2d = (Graphics2D) g.create();
-		g.drawImage(image, 0, 0, null);
-		// g.dispose();
-	}
 
 	public void setConnections(String description) {
 		// TODO Auto-generated method stub
@@ -55,9 +50,6 @@ public class Tile extends Cell implements Connectable {
 		}
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
 
 	/**
 	 * @param id
@@ -66,6 +58,7 @@ public class Tile extends Cell implements Connectable {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	/**
 	 * @return the id

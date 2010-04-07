@@ -8,16 +8,21 @@ import java.awt.Color;
  */
 public class Rail {
 
-	private Color	railColor;
+	@Override
+	public String toString() {
+		return "Rail [owner=" + owner + ", sourceDir=" + sourceDir
+				+ ", targetDir=" + targetDir + ", used=" + used + "]";
+	}
 
-	private char	sourceDir;
+	private Color railColor;
 
-	private char	targetDir;
+	private char sourceDir;
 
-	private boolean	used;
+	private char targetDir;
 
-	private int		owner;
+	private boolean used;
 
+	private int owner;
 
 	public Rail(char s, char t) {
 		// TODO Auto-generated constructor stub
@@ -27,51 +32,41 @@ public class Rail {
 		setOwner(-1);
 	}
 
-
 	public void setTargetDir(char targetDir) {
 		this.targetDir = targetDir;
 	}
-
 
 	public char getTargetDir() {
 		return targetDir;
 	}
 
-
 	public void setSourceDir(char sourceDir) {
 		this.sourceDir = sourceDir;
 	}
-
 
 	public char getSourceDir() {
 		return sourceDir;
 	}
 
-
 	public void setRailColor(Color railColor) {
 		this.railColor = railColor;
 	}
-
 
 	public Color getRailColor() {
 		return railColor;
 	}
 
-
 	public void setOwner(int owner) {
 		this.owner = owner;
 	}
-
 
 	public int getOwner() {
 		return owner;
 	}
 
-
 	public void setUsed(boolean used) {
 		this.used = used;
 	}
-
 
 	public boolean isUsed() {
 		return used;

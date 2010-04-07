@@ -26,6 +26,6 @@ public class StationPanel extends CellPanel {
 		// TODO Auto-generated method stub
 		super.paintComponents(g);
 		cellStation.paintComponent(g);
-		g.dispose();
+		//g.dispose();
 	}
 }

@@ -1,6 +1,7 @@
 package edu.gvsu.jmetro.engine;
 
 import java.util.List;
+import java.util.Stack;
 
 /*******************************************************************************
  * Abstract class for initializing a set of {@link projects.metro.Connectable}
@@ -9,10 +10,9 @@ import java.util.List;
  * @author Zachary Kurmas
  * 
  *****************************************************************************/
-// (C) 2010 Zachary Kurmas
+// (C) 2010 Zachary Kurmas, and Matthew Levandowski
 // Created Jan 21, 2010
-public abstract class TileGenerator
-{
+public abstract class TileGenerator {
 
 	/**
 	 * Indicates that this {@code TileGenerator} doesn't initialize a fixed
@@ -39,8 +39,7 @@ public abstract class TileGenerator
 	 **************************************************************************/
 	public abstract int size();
 
-	
-	/*************************************************************************
+/*************************************************************************
 	 * Initialize multiple copies of a {@code Connectable} in a {@code List}
 	 * 
 	 * @param type
@@ -53,8 +52,7 @@ public abstract class TileGenerator
 	 * @param position the index of the first item to initialize
 	 **************************************************************************/
 	public static void initializeMultiples(String type, int number,
-			List<? extends Connectable> bag, int position)
-	{
+			List<? extends Connectable> bag, int position) {
 		if (position + number > bag.size()) {
 			throw new IllegalArgumentException(
 					"Cannot initialize beyond end of list.");
@@ -70,14 +68,29 @@ public abstract class TileGenerator
 	 * @param list
 	 *            the list of {@code Connectable} objects to shuffle.
 	 **************************************************************************/
-	public <T extends Connectable> void shuffle(List<T> list)
-	{
+	public <T extends Connectable> void shuffle(List<T> list) {
 		for (int i = 0; i < list.size(); i++) {
 			int dest = (int) Math.random() * list.size();
 
 			T temp = list.get(i);
 			list.set(i, list.get(dest));
 			list.set(dest, temp);
+		}
+	}
+
+	/**************************************************************************
+	 * Shuffle the stack of {@code Connectable} objects. This method was added
+	 * by Matthew Levandowski.
+	 * 
+	 * @param stack
+	 *            the stack of {@code Connectable} objects to shuffle.
+	 **************************************************************************/
+	public <T extends Connectable> void shuffle(Stack<T> stack) {
+		for (int i = 0; i < stack.size(); i++) {
+			int dest = (int) Math.random() * stack.size();
+			T temp = stack.get(i);
+			stack.set(i, stack.get(dest));
+			stack.set(dest, temp);
 		}
 	}
 
