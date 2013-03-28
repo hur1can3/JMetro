@@ -5,7 +5,7 @@ package edu.gvsu.jmetro.engine;
  * contract between the data being searched (i.e. the in game map) and the path
  * finding generic tools
  * 
- * @author Kevin Glass
+ * @author Matthew Levandowski
  */
 public interface TileBasedMap {
 	/**
